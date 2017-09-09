@@ -1,0 +1,18 @@
+FROM ubuntu:14.04
+
+RUN apt-get update -y
+RUN apt-get install -y build-essential curl python-pip python-dev 
+
+RUN apt-get install -y libssl-dev libffi-dev openssh-client
+
+RUN pip install -U pip setuptools boto boto3 cryptography
+
+RUN pip install -U cryptography ansible==2.1.1.0
+
+RUN mkdir /root/.ssh
+RUN mkdir /playbook
+WORKDIR /playbook
+VOLUME /playbook
+
+ADD ansible-wrapper.sh /root/
+ENTRYPOINT ["/root/ansible-wrapper.sh"]
