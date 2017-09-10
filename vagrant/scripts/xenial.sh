@@ -28,8 +28,8 @@ cat >> ~/.bash_completion << EOF
 #
 # Source all the files in the ~/.bash_completion.d folder
 #
-for completion in ~/.bash_completion.d/*
-do
-	source "\${completion}"
-done
+#for completion in ~/.bash_completion.d/*
+#do
+#	source "\${completion}"
+#done
 EOF

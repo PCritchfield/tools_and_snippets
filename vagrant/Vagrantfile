@@ -100,17 +100,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     cfg.vm.provider 'virtualbox' do |v|
       v.name = 'Base Ubuntu 16.04'
-      v.memory = 2048
+      v.memory = 4096
       v.cpus = 2
     end
     
-    UNIX_HOME = '/home/ubuntu' 
+    UNIX_HOME = '/home/ubuntu'
+    sync_projects_directory cfg
 
     copy_dotfiles(cfg)
     copy_ssh_keys(cfg)
 
     cfg.vm.provision :shell, :privileged => false, :path => 'scripts/xenial.sh'
-    cfg.vm.provision :shell, :privileged => true, :path => 'scripts/xenial-docker.sh'
+    cfg.vm.provision :shell, :privileged => false, :path => 'scripts/xenial-docker.sh'
   end
 
  end
