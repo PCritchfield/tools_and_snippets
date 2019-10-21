@@ -1,0 +1,14 @@
+## GIT ALIASES ##
+alias gs='clear && git status'
+alias grm='git rm'
+alias ga='git add'
+alias gc='git commit'
+
+## CLI ALIASES ##
+alias s='clear'
+alias lh='clear && ls -lah --color=auto'
+
+alias ansible-bash='docker run -ti --rm --entrypoint=bash -v ~/code/devops-tools/ansible:/playbook -w /playbook <ANSIBLE_CONTAINER>'
+alias tf='docker run -ti --rm -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group --user $(id -u):$(id -g) -v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} -e SSH_AUTH_SOCK=${SSH_AUTH_SOCK} -v $TERRAFORM_HOME:/tf -w /tf/`echo \`pwd\` | sed s@$TERRAFORM_HOME@@` -e HOME=/tmp hashicorp/terraform:0.11.8'
+alias tf12='docker run -ti --rm -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group --user $(id -u):$(id -g) -v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} -e SSH_AUTH_SOCK=${SSH_AUTH_SOCK} -v $TERRAFORM_HOME:/tf -w /tf/`echo \`pwd\` | sed s@$TERRAFORM_HOME@@` -e HOME=/tmp hashicorp/terraform:0.12.6'
+#alias cbc-prd='docker run -ti --rm -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group --user $(id -u):$(id -g) -v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} -e SSH_AUTH_SOCK=${SSH_AUTH_SOCK} -v ~/code/callbackcloud-automation/ansible:/playbook -w /playbook -e HOME=/tmp <ANSIBLE_CONTAINER>'
