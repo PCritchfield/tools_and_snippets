@@ -4,14 +4,14 @@
 SCRIPT=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 SCRIPTPATH=$(dirname "$SCRIPT")
+# set here the path to the directory containing your videos
+VIDEOPATH="$SCRIPTPATH/video"
 
 # get rid of the cursor so we don’t see it when videos are running
 setterm -cursor off
 
-# set here the path to the directory containing your videos
-VIDEOPATH="$SCRIPTPATH/video"
-
-# you can normally leave this alone
+# set video player based on hardware. Currently AMD or ARM(pi)
+# TODO set to a map and use a single if block
 if [ `uname -m` = "x86_64" ]; then
   SERVICE="mpv"
   OPTIONS="--fs"
@@ -23,7 +23,7 @@ if [ `uname -m` = "armv7l" ]; then
 fi
 
 
-# now for our infinite loop!
+# Until interupted continue to play the available videos on a loop
 while true; do
   if ps ax | grep -v grep | grep $SERVICE > /dev/null
   then
