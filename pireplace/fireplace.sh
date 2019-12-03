@@ -8,7 +8,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 VIDEOPATH="$SCRIPTPATH/video"
 
 # get rid of the cursor so we don’t see it when videos are running
-setterm -cursor off
+setterm -cursor on
 
 # set video player based on hardware. Currently AMD or ARM(pi)
 # TODO set to a map and use a single if block
@@ -33,11 +33,10 @@ while true; do
       do
         clear
         $SERVICE $OPTIONS $entry > /dev/null
-	read input
-	  if [ $input = "q" ] || [ $input = "Q" ]
-          then 
-            break
-          fi
+	if [ $? = "4" ]
+        then 
+          kill $(ps aux | fgrep -v grep | fgrep 'fireplace' | awk '{print $2}') 
+        fi
       done
   fi
 done
