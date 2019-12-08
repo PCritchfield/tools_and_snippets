@@ -1,12 +1,22 @@
 #! /bin/bash
 
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
+PATIOBAR_DIR=$SCRIPTPATH/Patiobar
+TLS_FINGERPRINT=`openssl s_client -connect tuner.pandora.com:443 < /dev/null 2> /dev/null | openssl x509 -noout -fingerprint | tr -d ':' | cut -d'=' -f2`
+EVENT_COMMAND=$PATIOBAR_DIR/eventcmd.sh
+FIFO=$PATIOBAR_DIR/ctl
+CONFIG_DIR=~/.config/pianobar
+
 for arg in "$@"
 do
     if [ "$arg" == "--username" ] || [ "$arg" == "-u" ]
     then
         USERNAME=$arg
     else
-        echo "Update ~/.config/pianobar with the Pandora username"
+        echo "Update ${CONFIG_DIR} with the Pandora username"
         USERNAME=user@example.com
     fi
 done
@@ -17,7 +27,7 @@ do
     then
         PASSWORD=$arg
     else
-        echo "Update ~/.config/pianobar with the Pandora password"
+        echo "Update ${CONFIG_DIR} with the Pandora password"
         PASSWORD=password
     fi
 done
@@ -28,20 +38,10 @@ do
     then
         AUTOSTART_STATION="autostart_station = ${arg}"
     else
-        echo "Update ~/.config/pianobar with an autostart_station"
+        echo "Update ${CONFIG_DIR} with an autostart_station"
         AUTOSTART_STATION="#autostart_station = 12345"
     fi
 done
-
-# Absolute path to this script, e.g. /home/user/bin/foo.sh
-SCRIPT=$(readlink -f "$0")
-# Absolute path this script is in, thus /home/user/bin
-SCRIPTPATH=$(dirname "$SCRIPT")
-PATIOBAR_DIR=$SCRIPTPATH/Patiobar
-TLS_FINGERPRINT=`openssl s_client -connect tuner.pandora.com:443 < /dev/null 2> /dev/null | openssl x509 -noout -fingerprint | tr -d ':' | cut -d'=' -f2`
-EVENT_COMMAND=$PATIOBAR_DIR/eventcmd.sh
-FIFO=$PATIOBAR_DIR/ctl
-CONFIG_DIR=~/.config/pianobar
 
 sudo apt update
 sudo apt install -y \
