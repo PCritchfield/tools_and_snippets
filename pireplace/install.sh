@@ -46,6 +46,7 @@ case $key in
     echo "-s --autostart_station --> The default station for Pandora to play on start"
     echo "-h --help --> Prints these options"
     shift # past argument
+    exit 0
     ;;
     *)    # unknown option
     POSITIONAL+=("$1") # save it in an array for later
