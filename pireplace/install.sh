@@ -1,21 +1,5 @@
 #! /bin/bash
 
-# # Absolute path to this script, e.g. /home/user/bin/foo.sh
-# SCRIPT=$(readlink -f "$0")
-# # Absolute path this script is in, thus /home/user/bin
-# SCRIPTPATH=$(dirname "$SCRIPT")
-# PATIOBAR_DIR="$SCRIPTPATH/patiobar"
-# UTILS_DIR=${SCRIPTPATH}/utils
-# TLS_FINGERPRINT=`openssl s_client -connect tuner.pandora.com:443 < /dev/null 2> /dev/null | openssl x509 -noout -fingerprint | tr -d ':' | cut -d'=' -f2`
-# EVENT_COMMAND=$PATIOBAR_DIR/eventcmd.sh
-# FIFO=$PATIOBAR_DIR/ctl
-# CONFIG_DIR=~/test
-
-# # INPUT DEFAULTS
-# USER_NAME=user@example.com
-# PASSWORD=password
-# AUTOSTART_STATION="#autostart_station = 12345"
-
 . ./config
 
 POSITIONAL=()
