@@ -22,6 +22,8 @@ if [ $(uname -m) = "armv7l" ]; then
   OPTIONS="-r"
 fi
 
+./pbstart
+
 # Until interupted continue to play the available videos on a loop
 while true; do
   if ps ax | grep -v grep | grep $SERVICE >/dev/null; then
@@ -31,6 +33,7 @@ while true; do
       clear
       $SERVICE $OPTIONS $entry >/dev/null
       if [ $? = "4" ]; then
+        ./pbstop
         kill $(ps aux | fgrep -v grep | fgrep 'fireplace' | awk '{print $2}')
       fi
     done
