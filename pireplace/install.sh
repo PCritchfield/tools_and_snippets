@@ -106,5 +106,3 @@ EOF
         echo "${CONFIG_DIR}/config already exists"
     fi
 fi
-
-fi
