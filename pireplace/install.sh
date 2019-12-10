@@ -55,11 +55,11 @@ esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-# sudo apt update
-# sudo apt install -y \
-#  pianobar \
-#  npm \
-#  screen
+sudo apt update
+sudo apt install -y \
+ pianobar \
+ npm \
+ screen
 
 git clone https://github.com/kylejohnson/Patiobar.git $PATIOBAR_DIR
 
