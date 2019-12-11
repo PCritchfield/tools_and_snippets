@@ -14,12 +14,12 @@ setterm -cursor on
 # TODO set to a map and use a single if block
 if [ $(uname -m) = "x86_64" ]; then
   SERVICE="mpv"
-  OPTIONS="--fs"
+  OPTIONS="--fs --no-audio"
 fi
 
 if [ $(uname -m) = "armv7l" ]; then
   SERVICE="omxplayer"
-  OPTIONS="-r"
+  OPTIONS="-r --vol -11000"
 fi
 
 ./pbstart
@@ -32,7 +32,7 @@ while true; do
     for entry in $VIDEOPATH/*; do
       clear
       $SERVICE $OPTIONS $entry >/dev/null
-      if [ $? = "4" ]; then
+      if [ $? = "4" ] || [ $? = "1" ]; then
         ./pbstop
         kill $(ps aux | fgrep -v grep | fgrep 'fireplace' | awk '{print $2}')
       fi
