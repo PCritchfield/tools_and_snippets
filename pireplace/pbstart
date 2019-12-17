@@ -10,5 +10,5 @@ screen -S pianobar -d -m bash -c 'pianobar'
 
 # The "patiobar" in the end is not needed and is used as an identifier so we can kill it when stopping.
 # Otherwise, we might kill other "node index.js" processes.
-node index.js patiobar > /dev/null 2>&1 &
+/usr/bin/node index.js patiobar > /dev/null 2>&1 &
 echo "Go to http://$(hostname):3000/ to launch the Web interface."

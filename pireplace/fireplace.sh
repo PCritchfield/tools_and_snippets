@@ -19,7 +19,7 @@ fi
 
 if [ $(uname -m) = "armv7l" ]; then
   SERVICE="omxplayer"
-  OPTIONS="-r --vol -11000"
+  OPTIONS="-r -o both"
 fi
 
 ./pbstart
@@ -31,6 +31,7 @@ while true; do
   else
     for entry in $VIDEOPATH/*; do
       clear
+      echo $SERVICE $OPTIONS $entry
       $SERVICE $OPTIONS $entry >/dev/null
       if [ $? = "4" ] || [ $? = "1" ]; then
         ./pbstop
