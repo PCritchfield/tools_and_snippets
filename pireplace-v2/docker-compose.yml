@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  fireplace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./video:/video
+    devices:
+      - "/dev/vchiq:/dev/vchiq"
+    restart: always

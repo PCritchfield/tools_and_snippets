@@ -1,0 +1,13 @@
+# Use a lightweight base image suitable for Raspberry Pi
+FROM debian:bullseye
+
+# Install omxplayer and other dependencies
+RUN apt update 
+RUN apt install -y gnupg
+RUN echo "deb http://archive.raspberrypi.org/debian bullseye main" >> /etc/apt/sources.list.d/raspi.list \ && apt-key adv --keyserver pgp.mit.edu --recv-key 0x82B129927FA3303E
+RUN apt update 
+RUN apt install -y omxplayer 
+RUN rm -rf /var/lib/apt/lists/*
+
+# Command to play the video (This is just a placeholder; the actual video path will be provided via docker-compose)
+CMD ["omxplayer", "/video/fireplace.mp4"]
