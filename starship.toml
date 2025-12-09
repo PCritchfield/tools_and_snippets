@@ -1,0 +1,36 @@
+add_newline = true
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold yellow)"
+
+[directory]
+style = "blue bold"
+truncation_length = 3
+truncate_to_repo = false
+
+[git_branch]
+symbol = " "
+style = "purple bold"
+
+[git_status]
+style = "purple"
+conflicted = "⚔️ "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕ "
+staged = "+${count} "
+modified = "!${count} "
+untracked = "?${count} "
+stashed = "📦 "
+
+[aws]
+symbol = "  "
+style = "bold yellow"
+
+[time]
+disabled = false
+format = "🕓 [$time]($style) "
+time_format = "%T"
+style = "dimmed white"

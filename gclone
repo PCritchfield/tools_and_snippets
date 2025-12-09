@@ -1,0 +1,47 @@
+#!/bin/bash
+# Function to convert HTTPS URL to SSH URL
+convert_to_ssh_url() {
+    local url="$1"
+    local ssh_url
+    if [[ "$url" =~ ^https://([^/]+)/(.+)$ ]]; then
+        domain="${BASH_REMATCH[1]}"
+        path="${BASH_REMATCH[2]}"
+        # Remove .git at the end if present
+        path="${path%.git}"
+        ssh_url="git@$domain:$path.git"
+        echo "$ssh_url"
+    else
+        # If the URL is already in SSH format or doesn't match HTTPS, return it as is
+        echo "$url"
+    fi
+}
+# Function to clone the repository
+clone_repo() {
+    local repo_url="$1"
+    local base_dir="$HOME/Projects"
+    # Convert HTTPS URL to SSH URL
+    repo_url=$(convert_to_ssh_url "$repo_url")
+    # Extract the path from the repo URL
+    repo_path=$(echo "$repo_url" | sed -E 's|git@([^:]+):|\1/|; s|\.git$||')
+    # Create the full destination path
+    dest_path="$base_dir/$repo_path"
+    # Create the directory if it doesn't exist
+    mkdir -p "$dest_path"
+    # Clone the repository into the destination path
+    git clone "$repo_url" "$dest_path"
+    # Add the directory to zoxide
+    if command -v zoxide &> /dev/null; then
+        zoxide add "$dest_path"
+        echo "Added '$dest_path' to zoxide"
+    else
+        echo "zoxide is not installed, skipping zoxide add"
+    fi
+}
+# Check if a repository URL is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <repository-url>"
+    exit 1
+fi
+# Call the clone_repo function with the provided URL
+clone_repo "$1"
+
